@@ -82,7 +82,7 @@ app.layout = html.Div([
     style_data={'whiteSpace': 'normal', 'height': 'auto'},  # Makes text wrap
 ),
     html.Button("Copy to Clipboard", id="copy-data-btn", n_clicks=0),
-    dcc.Textarea(id="clipboard-data", style={'display': 'none'})
+    dcc.Textarea(id="clipboard-data", style={'width': '100%', 'height': '200px'})
 ])
 
 @app.callback(
@@ -829,7 +829,7 @@ def format_table_for_clipboard(table_data, table_columns):
 def copy_data_to_clipboard(n_clicks, table_data, table_columns):
     """Copies the main data table to clipboard."""
     formatted_data = format_table_for_clipboard(table_data, table_columns)
-    pyperclip.copy(formatted_data)  # Copy to system clipboard
+    #pyperclip.copy(formatted_data)  # Copy to system clipboard
     return formatted_data
 
 
