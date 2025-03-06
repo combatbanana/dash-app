@@ -812,10 +812,11 @@ def format_table_for_clipboard(table_data, table_columns):
     headers = [col["name"] for col in table_columns]
     
     # Convert each row into a comma-separated string
-    rows = [",".join(map(str, [row[col["id"]] for col in table_columns])) for row in table_data]
+    rows = ["\t".join(map(str, [row[col["id"]] for col in table_columns])) for row in table_data]
+
 
     # Combine headers and rows
-    return "\n".join([",".join(headers)] + rows)
+    return "\n".join(["\t".join(headers)] + rows)
 
 
 @app.callback(
