@@ -83,8 +83,7 @@ app.layout = html.Div([
 ),
     html.Button("Copy to Clipboard", id="copy-data-btn", n_clicks=0),
     dcc.Textarea(id="clipboard-data", style={'width': '100%', 'height': '200px'}),
-    dcc.Textarea(id="clipboard-fail", style={'width': '100%', 'height': '200px'}),
-    dcc.Textarea(id="clipboard-avg", style={'width': '100%', 'height': '200px'})
+
 ])
 
 @app.callback(
@@ -607,7 +606,7 @@ app.layout.children.append(
             ]
         ),
         html.Button("Copy to Clipboard", id="copy-fail-btn", n_clicks=0),
-        dcc.Textarea(id="clipboard-fail", style={'display': 'none'})
+        dcc.Textarea(id="clipboard-fail", style={'width': '100%', 'height': '200px'}),
         
     ])
 )
@@ -800,9 +799,12 @@ app.layout.children.append(
             style_data={'whiteSpace': 'normal', 'height': 'auto'}
         ),
         html.Button("Copy to Clipboard", id="copy-avg-btn", n_clicks=0),
-        dcc.Textarea(id="clipboard-avg", style={'display': 'none'})
+        
+        dcc.Textarea(id="clipboard-avg", style={'width': '100%', 'height': '200px'})
     ])
 )
+
+
 import pyperclip  # Needed for clipboard functionality
 
 def format_table_for_clipboard(table_data, table_columns):
