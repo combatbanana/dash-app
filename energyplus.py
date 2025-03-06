@@ -6,8 +6,9 @@ import dash
 from dash import Dash, dcc, html, Input, Output, State, ALL, dash_table
 from datetime import datetime
 COLOR_PALETTE = ["#00012A", "#000380", "#62BB4D", "#336327", "#808080", "#00CFF2", "#878787", "#72D959", "#C7C7C7", "#7EF063"]
-app = Dash(__name__)
 
+app = Dash(__name__)
+server = app.server
 df = pd.DataFrame()
 
 app.layout = html.Div([
