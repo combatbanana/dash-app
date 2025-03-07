@@ -81,7 +81,7 @@ app.layout = html.Div([
     style_table={'overflowX': 'auto'},  # Makes it scrollable
     style_data={'whiteSpace': 'normal', 'height': 'auto'},  # Makes text wrap
 ),
-    html.Button("Copy to Clipboard", id="copy-data-btn", n_clicks=0),
+    html.Button("Copy to textbox", id="copy-data-btn", n_clicks=0),
     dcc.Textarea(id="clipboard-data", style={'width': '100%', 'height': '200px'}),
 
 ])
@@ -605,7 +605,7 @@ app.layout.children.append(
                 }
             ]
         ),
-        html.Button("Copy to Clipboard", id="copy-fail-btn", n_clicks=0),
+        html.Button("Copy to textbox", id="copy-fail-btn", n_clicks=0),
         dcc.Textarea(id="clipboard-fail", style={'width': '100%', 'height': '200px'}),
         
     ])
@@ -798,26 +798,25 @@ app.layout.children.append(
             style_table={'overflowX': 'auto'},
             style_data={'whiteSpace': 'normal', 'height': 'auto'}
         ),
-        html.Button("Copy to Clipboard", id="copy-avg-btn", n_clicks=0),
+        html.Button("Copy to textbox", id="copy-avg-btn", n_clicks=0),
         
         dcc.Textarea(id="clipboard-avg", style={'width': '100%', 'height': '200px'})
     ])
 )
 
 
-import pyperclip  # Needed for clipboard functionality
+#import pyperclip  # Needed for clipboard functionality
 
 def format_table_for_clipboard(table_data, table_columns):
-    """Formats table data into a string suitable for clipboard copying."""
+    """Formats table data into a string suitable for clipboard copying, replacing empty values with '0'."""
     if not table_data or not table_columns:
         return ""
-    
+
     # Extract column names
     headers = [col["name"] for col in table_columns]
-    
-    # Convert each row into a comma-separated string
-    rows = ["\t".join(map(str, [row[col["id"]] for col in table_columns])) for row in table_data]
 
+    # Convert each row into a tab-separated string, replacing missing values with '0'
+    rows = ["\t".join(map(str, [row.get(col["id"], 0) for col in table_columns])) for row in table_data]
 
     # Combine headers and rows
     return "\n".join(["\t".join(headers)] + rows)
