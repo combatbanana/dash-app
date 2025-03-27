@@ -7,7 +7,7 @@ import pyperclip  # For copying data to clipboard
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
-
+server = app.server
 df = pd.DataFrame()  # Placeholder for uploaded data
 
 app.layout = html.Div([
@@ -57,7 +57,7 @@ app.layout = html.Div([
         style_table={'overflowX': 'auto'}
     ),
 
-    dcc.Textarea(id="clipboard-data", style={'display': 'none'})
+    dcc.Textarea(id="clipboard-data", style={'width': '100%', 'height': '200px'})
     
 ])
 
@@ -165,7 +165,7 @@ def copy_table_to_clipboard(n_clicks, table_data, table_columns):
     headers = [col["name"] for col in table_columns]
     rows = ["\t".join(map(str, [row[col["id"]] for col in table_columns])) for row in table_data]
     clipboard_text = "\n".join(["\t".join(headers)] + rows)
-    pyperclip.copy(clipboard_text)
+    #pyperclip.copy(clipboard_text)
     return clipboard_text
 
 import sys
